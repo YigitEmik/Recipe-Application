@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Recipe</title>
+
+</head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+<style>
+    :root, :root::before, :root::after {
+        box-sizing: border-box;
+        --primary-color: #b9d9c3;
+        --accent-color: #f0810f;
+        --white: #fcfdfe;
+        --ff-title: 'Noto Serif', serif;
+        --ff-text: 'Muli', sans-serif;
+    }
+
+    body {
+        background-color: var(--white);
+        font-family: var(--ff-text);
+        font-size: 16px;
+    }
+
+    .card {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        box-shadow: 3px 2px 10px rgba(0, 0, 0, 0.15);
+        margin-bottom: 4em;
+        padding-bottom: 1em;
+    }
+
+    .card--title {
+        font-family: var(--ff-title);
+        padding-top: 1em;
+    }
+
+    .card__title-box {
+        text-align: center;
+        background-color: var(--primary-color);
+        color: #555;
+    }
+
+    .card__image--wrapper {
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .card__image {
+        height: 40em;
+    }
+
+    .card__ingredients, .card__directions {
+        padding: 0 1.6rem;
+    }
+
+    .card_ingredients--wrapper {
+        padding-left: 1.6rem;
+    }
+
+    .card_ingredients--wrapper li {
+        padding-bottom: 0.5rem;
+    }
+
+</style>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 2em">
+    <div class="navbar-collapse collapse w-100 dual-collapse2 order-2 order-md-2 text-center"
+         style="padding-left: 40%;">
+        <ul class="navbar-nav mr-auto text-center" style="">
+            <li class="nav-item"><a class="nav-link" th:href="@{/recipe/page/1}">Homepage - Recipes</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/user/favorites}">Favourites</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/user/profile}">Profile</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/user/my-recipes}">My Recipes</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/user/my-todos}">My todos</a></li>
+            <li class="nav-item" style="margin-left: 1em">
+                <form th:action="@{/logout}" method="post">
+                    <input class="btn btn-danger" type="submit" value="Logout"/>
+                </form>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+
+<div class="container" style="text-align: center">
+    <div class="card">
+
+        <div class="card__title-box card--title">
+            <h2 th:text="${recipe.name}"></h2>
+        </div>
+
+        <div class="card__image--wrapper">
+
+            <img th:src="${recipe.imageUrl}"
+                 alt="" class="card__image">
+        </div>
+
+        <div class="card__ingredients" style="padding-top: 1em">
+            <div style="text-align: center">Prep Time : &nbsp;<span class="h5" th:text="${recipe.prepTime}"></span>&nbsp; min
+            </div>
+            <div style="text-align: center">Cook Time : &nbsp;<span class="h5" th:text="${recipe.cookTime}"></span>&nbsp; min
+            </div>
+        </div>
+
+        <div class="card__ingredients">
+            <h3 class="card--title">Ingredients</h3>
+            <ul class="card_ingredients--wrapper">
+                [(${recipe.ingredients})]
+            </ul>
+        </div>
+
+        <div class="card__directions">
+            <h3 class="card--title">Methods</h3>
+            [(${recipe.method})]
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

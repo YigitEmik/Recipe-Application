@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Recipe</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+            crossorigin="anonymous"></script>
+    <style>
+        .help-block {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 2em">
+    <div class="navbar-collapse collapse w-100 dual-collapse2 order-2 order-md-2 text-center"
+         style="padding-left: 40%;">
+        <ul class="navbar-nav mr-auto text-center" style="">
+            <li class="nav-item"><a class="nav-link" th:href="@{/recipe/page/1}">Homepage - Recipes</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/user/favorites}">Favourites</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/user/profile}">Profile</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/user/my-recipes}">My Recipes</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/user/my-todos}">My todos</a></li>
+            <li class="nav-item" style="margin-left: 1em">
+                <form th:action="@{/logout}" method="post">
+                    <input class="btn btn-danger" type="submit" value="Logout"/>
+                </form>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="container">
+        <form th:action="@{/recipe/create}" th:object="${recipe}" method="post">
+            <table class="table form-input">
+                <thead></thead>
+                <tbody>
+                <tr>
+                    <td> Image Url</td>
+                    <td><input class="text-input form-control" type="text" id="imageUrl"
+                               th:field="*{imageUrl}" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Name</td>
+                    <td><input class="text-input form-control" type="text" id="name"
+                               th:field="*{name}" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Prep Time(min)</td>
+                    <td><input class="text-input form-control" type="number" id="prepTime"
+                               th:field="*{prepTime}" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Cook Time(min)</td>
+                    <td><input class="text-input form-control" type="number" id="cookTime"
+                               th:field="*{cookTime}" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Ingredients</td>
+                    <td><textarea rows="5" class="text-input form-control"  id="ingredients"
+                               th:field="*{ingredients}" required></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Method</td>
+                    <td><textarea rows="5" class="text-input form-control" id="method"
+                               th:field="*{method}" required></textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td><input class="btn btn-primary" type="submit" id="submit"
+                              value="Create">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
+
